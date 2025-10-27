@@ -1,0 +1,125 @@
+.chat-container {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: transparent;
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 15px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.chat-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, rgba(88, 166, 255, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(35, 134, 54, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.welcome-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px;
+  background: var(--bg-glass);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-xl);
+  color: var(--text-secondary);
+  max-width: 100%;
+  animation: welcomeSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.welcome-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  opacity: 0.3;
+}
+
+@keyframes welcomeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.welcome-message .ai-avatar {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.welcome-message .ai-avatar::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--brand-primary));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  animation: avatarGlow 3s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.welcome-message .ai-avatar img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg-card);
+}
+
+.welcome-message p {
+  margin: 0;
+  padding-top: 10px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+  
+  .welcome-message {
+    padding: 20px;
+  }
+  
+  .welcome-message .ai-avatar img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .welcome-message p {
+    font-size: 14px;
+  }
+}
